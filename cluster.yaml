@@ -8,5 +8,4 @@ nodeGroups:
     instanceType: t2.micro
     desiredCapacity: 3
     ssh: 
-      publicKeyName: mykey
-      
+      publicKeyName: aws-bootstrap
