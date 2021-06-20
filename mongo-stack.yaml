@@ -11,18 +11,18 @@ spec:
     metadata:
       labels:
         app: mongodb
-      spec:
-        containers:
-        - name: mongodb
-          image: mongo:3.6.5-jessie
-          volumeMounts:
-            - name: mongo-persistent-storage
-              mountPath: /data/db
-        volumes:
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:3.6.5-jessie
+        volumeMounts:
           - name: mongo-persistent-storage
-            persistentVolumeClaim:
-              claimName: mongo-pvc
-
+            mountPath: /data/db
+      volumes:
+        - name: mongo-persistent-storage
+          # pointer to the configuration of HOW we want the mount to be implemented
+          persistentVolumeClaim:
+            claimName: mongo-pvc
 ---
 kind: Service
 apiVersion: v1
@@ -35,4 +35,3 @@ spec:
     - name: mongoport
       port: 27017
   type: ClusterIP
-  
